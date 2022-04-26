@@ -37,10 +37,10 @@ const auth = localStorage.getItem('authId');
             as={NavLink} to="/add"
           />
           <Menu.Item
-            name='leader_board'
-            active={activeItem === 'leader_board'}
+            name='leaderboard'
+            active={activeItem === 'leaderboard'}
             onClick={handleItemClick}
-            as={NavLink} to="/leader_board  "
+            as={NavLink} to="/leaderboard  "
           />
           <Menu.Menu position='right'>
           <Menu.Item style={{paddingBottom: 5}}>

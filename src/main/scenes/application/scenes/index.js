@@ -9,6 +9,7 @@ import { handleInitialData } from '../../actions/shared';
 import { useDispatch, useSelector } from 'react-redux';
 import { receiveUsers } from '../../actions/users';
 import { receiveQuestions } from '../../actions/questions';
+import NoMatch from './scenes/home/NoMatch';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -52,16 +53,17 @@ const Dashboard = () => {
             
             element={<Home users={usersList} questions={questionsList}/>}
           />
+          <Route path="/app/questions/bad_id" element={<NoMatch/>} />
             <Route path="/app/questions/:question_id_param" element={<UserCard/>} />
             <Route
             path='/add'
             element={<AddNew />}
           />
                   <Route
-            path='/leader_board'
+            path='/leaderboard'
             element={<LeaderBoard users={usersList} />}
           />
-        
+           <Route element={<NoMatch/>} />
             </Routes>
           </div>
         </main>

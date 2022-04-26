@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { receiveQuestions } from "main/scenes/actions/questions";
 import { receiveUsers } from 'main/scenes/actions/users';
 import { handleInitialData } from './../../../../actions/shared';
+import { useNavigate } from 'react-router-dom';
 import {
     useParams
 } from "react-router-dom";
@@ -79,18 +80,18 @@ const UserCard = ({
         } else {
             setQuestion(questionsList[question_id_param]);
             setUser(usersList[auth])
-            if (question === undefined) {
-                setBadPath(true);
-            } else {
-                setAuthor(usersList[question.author]);
+          
+                setAuthor(usersList[question?.author]);
                 setPollType(pollTypes.POLL_QUESTION);
 
                 const answ = user && user.answers ? Object.keys(user.answers) : []
-                if (answ.includes(question.id)) {
+                if (answ.includes(question?.id)) {
                     setPollType(pollTypes.POLL_RESULT);
                 }
 
-            }
+                if (question  && user === undefined ) {
+                    setBadPath(true);
+                } 
         }
     }, [_questions, _users, auth, user, question, question_id, question_id_param, questionsList, usersList]);
 
@@ -99,6 +100,16 @@ const UserCard = ({
         unanswered === null
             ? `1px solid ${colors.grey}`
             : `2px solid ${tabColor.hex}`;
+
+    let navigate = useNavigate();
+
+ 
+    useEffect(() => {
+    
+        if (badPath === true) {
+            navigate("/app/questions/bad_id")
+        }
+    }, [badPath, navigate, question])
 
     return (
         <>
