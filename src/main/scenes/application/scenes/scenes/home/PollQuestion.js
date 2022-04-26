@@ -4,7 +4,7 @@ import { Header, Button, Form, Radio } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { handleSaveQuestionAnswer } from './../../../../actions/users';
 
-const PollQuestion = ({ question}) => {
+const PollQuestion = ({ question }) => {
     const [value, setValue] = useState('')
     const dispatch = useDispatch();
     const handleChange = (e, { value }) => setValue(value);
@@ -42,7 +42,7 @@ const PollQuestion = ({ question}) => {
                         size="tiny"
                         fluid
                         positive
-                       
+
                         content="Submit"
                     />
                 </Form.Field>

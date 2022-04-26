@@ -9,7 +9,6 @@ import { receiveQuestions } from "main/scenes/actions/questions";
 import { receiveUsers } from 'main/scenes/actions/users';
 import { handleInitialData } from './../../../../actions/shared';
 import {
-
     useParams
 } from "react-router-dom";
 
@@ -19,6 +18,18 @@ const pollTypes = {
     POLL_RESULT: 'POLL_RESULT'
 };
 
+const PollContent = ({ pollType, question, unanswered }) => {
+    switch (pollType) {
+        case pollTypes.POLL_TEASER:
+            return <PollTeaser question={question} unanswered={unanswered} />;
+        case pollTypes.POLL_QUESTION:
+            return <PollQuestion question={question} />;
+        case pollTypes.POLL_RESULT:
+            return <PollResult question={question} />;
+        default:
+            return;
+    }
+};
 
 const UserCard = ({
     question_id,
@@ -35,9 +46,11 @@ const UserCard = ({
     const [usersList, setUsers] = useState([]);
     const [questionsList, setquestionsList] = useState([]);
     let { question_id_param } = useParams();
+
     useEffect(() => {
         dispatch(handleInitialData())
-      }, [dispatch]);
+    }, [dispatch]);
+
     useEffect(() => {
         dispatch(receiveQuestions());
         dispatch(receiveUsers());
@@ -56,6 +69,7 @@ const UserCard = ({
     }, [questions]);
 
     const auth = localStorage.getItem('authId');
+    const [user, setUser] = useState(auth)
 
     useEffect(() => {
         if (question_id !== undefined) {
@@ -64,34 +78,22 @@ const UserCard = ({
             setPollType(pollTypes.POLL_TEASER);
         } else {
             setQuestion(questionsList[question_id_param]);
-            const user = usersList[auth];
+            setUser(usersList[auth])
             if (question === undefined) {
                 setBadPath(true);
             } else {
                 setAuthor(usersList[question.author]);
                 setPollType(pollTypes.POLL_QUESTION);
+
                 const answ = user && user.answers ? Object.keys(user.answers) : []
                 if (answ.includes(question.id)) {
                     setPollType(pollTypes.POLL_RESULT);
                 }
+
             }
         }
-    }, [_questions, _users, auth, question, question_id, question_id_param, questionsList, usersList]);
+    }, [_questions, _users, auth, user, question, question_id, question_id_param, questionsList, usersList]);
 
-
-
-    const PollContent = () => {
-        switch (pollType) {
-            case pollTypes.POLL_TEASER:
-                return <PollTeaser question={question} unanswered={unanswered} />;
-            case pollTypes.POLL_QUESTION:
-                return <PollQuestion question={question} />;
-            case pollTypes.POLL_RESULT:
-                return <PollResult question={question} />;
-            default:
-                return;
-        }
-    };
     const tabColor = unanswered === true ? colors.green : colors.blue;
     const borderTop =
         unanswered === null

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Header,
     Segment,
@@ -19,6 +19,7 @@ import {
       bgColor: '#f4f4f4'
     }
   };
+
 const YourVoteLabel = () => (
 <Label color="orange" ribbon="right" className="vote">
     <Icon name="check circle outline" size="big" className="compact" />
@@ -86,11 +87,9 @@ const PollResult = ({ question, user }) => {
             {optionTwoVotes} out of {votesTotal} votes
           </Progress>
         </Segment>
-        {/* <Form.Field> */}
         <Button size="tiny" floated="right" onClick={handleClick}>
           Back
         </Button>
-        {/* </Form.Field> */}
   </>
   );
 }

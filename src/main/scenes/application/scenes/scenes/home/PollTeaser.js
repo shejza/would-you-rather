@@ -19,6 +19,7 @@ const PollTeaser = ({question, unanswered}) => {
     }
 }, [navigate, question.id, viewPoll])
 
+
   return (
     <>
         <Header as="h5" textAlign="left">
