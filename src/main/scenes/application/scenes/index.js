@@ -39,7 +39,7 @@ const Dashboard = () => {
     }
   }, [questions]);
   
-  
+  console.log(questions)
     return (
       <>
         <main className="main">

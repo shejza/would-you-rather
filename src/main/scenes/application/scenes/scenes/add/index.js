@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Segment,
     Header,
@@ -9,6 +9,7 @@ import {
   import { useDispatch } from 'react-redux';
   import { handleSaveQuestion } from "../../../../actions/questions";
   import { useNavigate } from "react-router-dom";
+import { handleInitialData } from './../../../../actions/shared';
 
 const AddNew = () => {
     const auth = localStorage.getItem('authId');
@@ -19,6 +20,11 @@ const AddNew = () => {
         optionTwoText: '',
         author: authedUser
       };
+
+      useEffect(() => {
+        dispatch(handleInitialData())
+      }, [dispatch]);
+      
     const [formValues, setFormValues] = useState(formDefaultValues)
     const handleChange = (e) => {
      const target = e.target;
@@ -31,8 +37,10 @@ const AddNew = () => {
         e.preventDefault();
 
        dispatch(handleSaveQuestion(formValues.optionOneText, formValues.optionTwoText, formValues.author));
-      // navigate('../app')
+      navigate('../app')
     }
+
+  
   return (
     <>
       <Segment.Group style={{ width: 650, margin: 'auto', marginTop: 64 }}>

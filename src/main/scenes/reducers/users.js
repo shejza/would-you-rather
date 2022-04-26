@@ -1,7 +1,6 @@
 import { RECEIVE_USERS, ADD_QUESTION_TO_USER, ADD_ANSWER_TO_USER } from './../actions/users';
 
 export function users(state = {}, action) {
- 
  switch (action.type) {
    case RECEIVE_USERS:
      return {
@@ -15,7 +14,7 @@ export function users(state = {}, action) {
         [authUser]: {
           ...state[authUser],
           answers: {
-            ...state[authUser].answers,
+            ...state.users[authUser].answers,
             [qid]: answer
           }
         }
