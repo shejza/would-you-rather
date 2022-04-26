@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Header, Button, Form, Radio } from 'semantic-ui-react';
-import { actions } from './services/actions';
+
 import { useDispatch } from 'react-redux';
+import { handleSaveQuestionAnswer } from './../../../../actions/users';
 
 const PollQuestion = ({ question}) => {
     const [value, setValue] = useState('')
@@ -11,7 +12,7 @@ const PollQuestion = ({ question}) => {
     const handleSubmit = e => {
         e.preventDefault();
         if (value !== '') {
-            dispatch(actions.handleSaveQuestionAnswer(authUser, question.id, value));
+            dispatch(handleSaveQuestionAnswer(authUser, question.id, value));
         }
     };
     return (

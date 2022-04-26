@@ -18,8 +18,8 @@ import {
         [qid]: {
           ...state[qid],
           [answer]: {
-            ...state[qid][answer],
-            votes: state[qid][answer].votes.concat(authUser)
+            ...state.questions[qid][answer],
+            votes: state.questions[qid][answer].votes.concat(authUser)
           }
         }
       };
