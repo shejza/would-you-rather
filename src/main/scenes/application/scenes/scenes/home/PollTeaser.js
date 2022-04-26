@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Header, Button } from 'semantic-ui-react';
 import { colors } from './../../../../../../helpers/colors';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { handleInitialData } from './../../../../actions/shared';
 
 const PollTeaser = ({question, unanswered}) => {
     const [viewPoll, setViewPoll] = useState(false)
@@ -11,11 +9,6 @@ const PollTeaser = ({question, unanswered}) => {
     const handleClick = e => {
         setViewPoll(!viewPoll);
     };
-    const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(handleInitialData())
-  }, [dispatch]);
 
   const buttonColor = unanswered === true ? colors.green : colors.blue;
   const buttonContent = unanswered === true ? 'Answer Poll' : 'Results';
@@ -25,7 +18,6 @@ const PollTeaser = ({question, unanswered}) => {
       return navigate (`./questions/${question.id}`);
     }
 }, [navigate, question.id, viewPoll])
-
 
   return (
     <>
