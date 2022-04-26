@@ -26,13 +26,15 @@ const UserCard = ({
     const [question, setQuestion] = useState({});
     const [author, setAuthor] = useState('');
     const [badPath, setBadPath] = useState(false);
-    let { question_id_param } = useParams();
+    
 
     const dispatch = useDispatch();
     const { users } = useSelector((state) => state.users);
     const { questions } = useSelector((state) => state.questions);
     const [usersList, setUsers] = useState([]);
     const [questionsList, setquestionsList] = useState([]);
+    let { question_id_param } = useParams();
+    
     useEffect(() => {
         dispatch(receiveQuestions());
         dispatch(receiveUsers());
@@ -50,8 +52,7 @@ const UserCard = ({
       }, [questions]);
       
     const auth = localStorage.getItem('authId');
-    console.log(questions, '')
-
+ 
     useEffect(() => {
         if (question_id !== undefined) {
             setQuestion(_questions[question_id]);
@@ -71,7 +72,7 @@ const UserCard = ({
                 }
             }
         }
-    }, [question_id, questions, author, usersList, _questions, _users, question, questionsList, question_id_param, auth]);
+    }, [_questions, _users, auth, question, question_id, question_id_param, questionsList, usersList]);
 
 
 

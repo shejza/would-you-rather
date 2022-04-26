@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header, Button } from 'semantic-ui-react';
 import { colors } from './../../../../../../helpers/colors';
 import { useNavigate } from 'react-router-dom';
@@ -12,10 +12,12 @@ const PollTeaser = ({question, unanswered}) => {
   const buttonColor = unanswered === true ? colors.green : colors.blue;
   const buttonContent = unanswered === true ? 'Answer Poll' : 'Results';
   let navigate = useNavigate();
+  useEffect(() => {
+    if (viewPoll === true) {
+      return navigate (`./questions/${question.id}`);
+    }
+}, [navigate, question.id, viewPoll])
 
-  if (viewPoll === true) {
-    return navigate (`./questions/${question.id}`);
-  }
   return (
     <>
         <Header as="h5" textAlign="left">
