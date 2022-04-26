@@ -28,7 +28,7 @@ const auth = localStorage.getItem('authId');
             active={activeItem === 'home'}
             onClick={handleItemClick}
             as={NavLink} 
-            to="/app" exact
+            to="/app" exact={+true}
           />
           <Menu.Item
             name='new'

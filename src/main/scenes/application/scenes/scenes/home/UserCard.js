@@ -21,12 +21,11 @@ const pollTypes = {
 const UserCard = ({
     question_id,
     unanswered = null, _questions, _users }) => {
-        
+
     const [pollType, setPollType] = useState('POLL_TEASER');
     const [question, setQuestion] = useState({});
     const [author, setAuthor] = useState('');
     const [badPath, setBadPath] = useState(false);
-    
 
     const dispatch = useDispatch();
     const { users } = useSelector((state) => state.users);
@@ -34,25 +33,26 @@ const UserCard = ({
     const [usersList, setUsers] = useState([]);
     const [questionsList, setquestionsList] = useState([]);
     let { question_id_param } = useParams();
-    
+
     useEffect(() => {
         dispatch(receiveQuestions());
         dispatch(receiveUsers());
-      }, [dispatch]);
-      useEffect(() => {
+    }, [dispatch]);
+
+    useEffect(() => {
         if (!!users) {
-          setUsers(users);
+            setUsers(users);
         }
-      }, [users]);
-    
-      useEffect(() => {
+    }, [users]);
+
+    useEffect(() => {
         if (!!questions) {
-          setquestionsList(questions);
+            setquestionsList(questions);
         }
-      }, [questions]);
-      
+    }, [questions]);
+
     const auth = localStorage.getItem('authId');
- 
+
     useEffect(() => {
         if (question_id !== undefined) {
             setQuestion(_questions[question_id]);
