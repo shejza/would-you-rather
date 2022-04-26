@@ -7,15 +7,17 @@ import {
     Form
   } from 'semantic-ui-react';
   import { useDispatch } from 'react-redux';
-  import { handleReturnQuestion } from "../../../../actions/questions";
+  import { handleSaveQuestion } from "../../../../actions/questions";
   import { useNavigate } from "react-router-dom";
 
 const AddNew = () => {
     const auth = localStorage.getItem('authId');
     const dispatch = useDispatch();
+    const authedUser = localStorage.getItem('authId');
     const formDefaultValues = {
         optionOneText: '',
-        optionTwoText: ''
+        optionTwoText: '',
+        author: authedUser
       };
     const [formValues, setFormValues] = useState(formDefaultValues)
     const handleChange = (e) => {
@@ -27,8 +29,9 @@ const AddNew = () => {
     let navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
-       dispatch(handleReturnQuestion(formValues));
-       navigate('../app')
+
+       dispatch(handleSaveQuestion(formValues.optionOneText, formValues.optionTwoText, formValues.author));
+      // navigate('../app')
     }
   return (
     <>
