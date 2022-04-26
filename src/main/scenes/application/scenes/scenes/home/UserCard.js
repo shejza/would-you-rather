@@ -7,7 +7,9 @@ import PollResult from './PollResult';
 import { useDispatch, useSelector } from 'react-redux';
 import { receiveQuestions } from "main/scenes/actions/questions";
 import { receiveUsers } from 'main/scenes/actions/users';
+import { handleInitialData } from './../../../../actions/shared';
 import {
+
     useParams
 } from "react-router-dom";
 
@@ -33,7 +35,9 @@ const UserCard = ({
     const [usersList, setUsers] = useState([]);
     const [questionsList, setquestionsList] = useState([]);
     let { question_id_param } = useParams();
-
+    useEffect(() => {
+        dispatch(handleInitialData())
+      }, [dispatch]);
     useEffect(() => {
         dispatch(receiveQuestions());
         dispatch(receiveUsers());
