@@ -4,6 +4,10 @@ import { receiveUsers } from '../actions/users';
 import { actions as authActions } from './services/actions';
 import { Dropdown, Card, Grid, Form, Header } from 'semantic-ui-react'
 import { handleInitialData } from './../actions/shared';
+import {
+  useLocation,
+  useNavigate
+} from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -39,10 +43,13 @@ const Login = () => {
   const onChange = (e, { value }) => {
     setValue(value);
   };
-
+  const location = useLocation();
+  let navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch((authActions.setAuthUser(value)));
+    const origin = location.state?.from?.pathname || '/app';
+    navigate(origin,  { replace: true });
   }
 
   return (

@@ -2,14 +2,15 @@ import React, {useState} from "react";
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../auth/services/actions';
 import { Menu, Image } from 'semantic-ui-react'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 const Nav = ({users}) => {
   const dispatch = useDispatch();
-
+  let navigate = useNavigate();
  const handleLogout = e => {
   e.preventDefault();
   dispatch((actions.setAuthUser(null)));
   localStorage.removeItem('authId');
+  navigate("/login");
 };
 
 const [activeItem, setActiveItem ] = useState('home');

@@ -5,7 +5,7 @@ function setAuthUser(id) {
   return (dispatch) => {
       localStorage.setItem('authId', id);
       dispatch(success(id));
-      window.location.href = '/app';
+      //window.location.href = '/app';
   };
 
   function success(id) {
