@@ -4,7 +4,7 @@ import { Header, Button, Form, Radio } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { handleSaveQuestionAnswer } from './../../../../actions/users';
 
-const PollQuestion = ({ question }) => {
+const PollQuestion = ({ question, setPollType }) => {
     const [value, setValue] = useState('')
     const dispatch = useDispatch();
     const handleChange = (e, { value }) => setValue(value);
@@ -12,9 +12,13 @@ const PollQuestion = ({ question }) => {
     const handleSubmit = e => {
         e.preventDefault();
         if (value !== '') {
-            dispatch(handleSaveQuestionAnswer(authUser, question.id, value));
+            dispatch(handleSaveQuestionAnswer(authUser, question.id, value, afterSave));
         }
     };
+
+    const afterSave = () => {
+        setPollType("POLL_RESULT")
+    }
     return (
         <>
             <Header as="h4">Would you rather</Header>

@@ -19,12 +19,12 @@ function addAnswerToUser(authUser, qid, answer) {
   };
 }
 
-export function handleSaveQuestionAnswer(authUser, qid, answer) {
+export function handleSaveQuestionAnswer(authUser, qid, answer, callback) {
   return dispatch => {
     dispatch(addAnswerToUser(authUser, qid, answer));
     dispatch(addAnswerToQuestion(authUser, qid, answer));
  
-    return saveQuestionAnswer(authUser, qid, answer).catch(e => {
+    return saveQuestionAnswer(authUser, qid, answer).then(() => callback()).catch(e => {
       console.warn('Error in handleSaveQuestionAnswer:', e);
     });
   };

@@ -19,14 +19,14 @@ const pollTypes = {
     POLL_RESULT: 'POLL_RESULT'
 };
 
-const PollContent = ({ pollType, question, unanswered }) => {
+const PollContent = ({ pollType, question, unanswered, setPollType }) => {
     switch (pollType) {
         case pollTypes.POLL_TEASER:
             return <PollTeaser question={question} unanswered={unanswered} />;
         case pollTypes.POLL_QUESTION:
-            return <PollQuestion question={question} />;
+            return <PollQuestion question={question} setPollType={setPollType} />;
         case pollTypes.POLL_RESULT:
-            return <PollResult question={question} />;
+            return <PollResult question={question}  />;
         default:
             return;
     }
@@ -135,6 +135,7 @@ const UserCard = ({
                                 pollType={pollType}
                                 question={question}
                                 unanswered={unanswered}
+                                setPollType={setPollType}
                             />
 
                         </Grid.Column>
