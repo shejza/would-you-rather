@@ -11,6 +11,8 @@ import { receiveUsers } from '../../actions/users';
 import { receiveQuestions } from '../../actions/questions';
 import NoMatch from './scenes/home/NoMatch';
 
+
+
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.users);
@@ -50,8 +52,9 @@ const Dashboard = () => {
         
           <Route
             path='/app'
-            
-            element={<Home users={usersList} questions={questionsList}/>}
+            element={
+                <Home users={usersList} questions={questionsList}/>
+            }
           />
           <Route path="/app/questions/bad_id" element={<NoMatch/>} />
             <Route path="/app/questions/:question_id_param" element={<UserCard/>} />
@@ -63,7 +66,7 @@ const Dashboard = () => {
             path='/leaderboard'
             element={<LeaderBoard users={usersList} />}
           />
-           <Route element={<NoMatch/>} />
+           <Route path="*" element={<NoMatch/>} />
             </Routes>
           </div>
         </main>

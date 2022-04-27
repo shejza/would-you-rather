@@ -8,6 +8,15 @@ import {
 import Index from 'main/scenes/application';
 import Login from "main/scenes/auth";
 
+const ProtectedRoute = ({ user, children }) => {
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
+
 export default function index() {
   const auth = !!localStorage.getItem('authId');
 
@@ -17,7 +26,9 @@ export default function index() {
         <Routes>
           <Route
             path='/*'
-            element={auth ? <Index /> : <Navigate to='/login' />}
+            element={auth ?  <ProtectedRoute user={auth}>
+           <Index />
+          </ProtectedRoute>  : <Navigate to='/login' />}
           />
           <Route
             path='/login'

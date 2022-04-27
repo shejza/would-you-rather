@@ -25,7 +25,7 @@ export function users(state = {}, action) {
             ...state,
             [author]: {
                 ...state[author], 
-                questions: state.users[author].questions.concat(id)
+                questions: state[author]?.questions.concat(id)
             }
         };  
    case 'ERROR':

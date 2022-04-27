@@ -17,7 +17,7 @@ const PollTeaser = ({question, unanswered}) => {
     if (viewPoll === true) {
       return navigate (`./questions/${question.id}`);
     }
-}, [navigate, question.id, viewPoll])
+}, [navigate, question?.id, viewPoll])
 
 
   return (
