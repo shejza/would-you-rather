@@ -89,9 +89,14 @@ const UserCard = ({
                     setPollType(pollTypes.POLL_RESULT);
                 }
 
-                if (question  && user === undefined ) {
-                    setBadPath(true);
-                } 
+                if(questions) {
+                    if (!(question_id_param in questions)) {
+                        setBadPath(true);
+                    } 
+                }
+              
+               
+               
         }
     }, [_questions, _users, auth, user, question, question_id, question_id_param, questionsList, usersList]);
 
@@ -107,7 +112,10 @@ const UserCard = ({
     useEffect(() => {
     
         if (badPath === true) {
+            
             navigate("/app/questions/bad_id")
+            localStorage.removeItem('authId');
+            navigate("/login")
         }
     }, [badPath, navigate, question])
 
