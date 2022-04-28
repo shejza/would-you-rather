@@ -2,15 +2,16 @@ import React, {useState} from "react";
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../auth/services/actions';
 import { Menu, Image } from 'semantic-ui-react'
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, Navigate } from "react-router-dom";
 const Nav = ({users}) => {
   const dispatch = useDispatch();
-  let navigate = useNavigate();
+  const location = useLocation();
+  const [isRedirect, setIsRedirect] = useState(false);
  const handleLogout = e => {
   e.preventDefault();
   dispatch((actions.setAuthUser(null)));
   localStorage.removeItem('authId');
-  navigate("/login");
+  setIsRedirect(true);
 };
 
 const [activeItem, setActiveItem ] = useState('home');
@@ -21,7 +22,7 @@ const auth = localStorage.getItem('authId');
 
   return (
     <>
-    
+    {isRedirect &&  <Navigate to={"/login"} replace={true} state={{ from: location }}/>}
     <div>
         <Menu pointing secondary>
           <Menu.Item

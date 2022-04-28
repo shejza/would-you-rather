@@ -45,10 +45,12 @@ const Login = () => {
   };
   const location = useLocation();
   let navigate = useNavigate();
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch((authActions.setAuthUser(value)));
     const origin = location.state?.from?.pathname || '/app';
+    
     navigate(origin,  { replace: true });
   }
 

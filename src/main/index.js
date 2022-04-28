@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -15,15 +15,15 @@ import NoMatch from './scenes/application/scenes/scenes/home/NoMatch';
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
   let navigate = useNavigate();
+  const [isRedirect, setIsRedirect] = useState(false);
+
   useEffect(() => {
     if(localStorage.getItem('authId') === null) {
-      console.log(location.pathname, 'ss');
-      navigate("login");
-      <Navigate to={"/login"} replace={true} state={{ from: location }}/>;
+      setIsRedirect(true);
    }
   }, [location, navigate]);
  
-  return children;
+  return isRedirect ? <Navigate to={"/login"} replace={true} state={{ from: location }}/> : children;
 }
 
 export default function index() {
