@@ -43,15 +43,13 @@ const Login = () => {
   const onChange = (e, { value }) => {
     setValue(value);
   };
-  const location = useLocation();
+
   let navigate = useNavigate();
- 
+  const { state } = useLocation();
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch((authActions.setAuthUser(value)));
-    const origin = location.state?.from?.pathname || '/app';
-    
-    navigate(origin,  { replace: true });
+    navigate(state?.path || "/app");
   }
 
   return (

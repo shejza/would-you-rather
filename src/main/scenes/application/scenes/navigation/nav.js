@@ -22,7 +22,7 @@ const auth = localStorage.getItem('authId');
 
   return (
     <>
-    {isRedirect &&  <Navigate to={"/login"} replace={true} state={{ from: location }}/>}
+    {isRedirect &&  <Navigate to={"/login"} replace={true} state={{ path: location.pathname }}/>}
     <div>
         <Menu pointing secondary>
           <Menu.Item

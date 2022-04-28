@@ -23,7 +23,7 @@ const PrivateRoute = ({ children }) => {
    }
   }, [location, navigate]);
  
-  return isRedirect ? <Navigate to={"/login"} replace={true} state={{ from: location }}/> : children;
+  return isRedirect ? <Navigate to={"/login"} replace={true} state={{ path: location.pathname }}/> : children;
 }
 
 export default function index() {
